@@ -4,7 +4,7 @@
     "description": "UUUYOU",
     "main": "src/index.js",
     "scripts": {
-        "start": "webpack-dev-server --hot --progress --colors",
+        "start": "webpack-dev-server --progress --colors",
         "build": "webpack -p --progress --colors",
         "watch": "webpack -w --progress --colors",
         "lint": "eslint ./src/**.js"
@@ -13,7 +13,7 @@
         "type": "git",
         "url": "git+https://github.com/jamesthompson275/UUUYOU"
     },
-    "author": "jamesthompson275",
+    "author": "Big Guys(4U)",
     "license": "MIT",
     "bugs": {
         "url": "git+https://github.com/jamesthompson275/UUUYOU/issues"

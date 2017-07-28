@@ -1,7 +1,7 @@
 import "./styles/index.scss";
 
 const start = () => {
-    console.log("UUUYOU")
+    console.log("UUUYOU");
 };
 
 const init = () => {

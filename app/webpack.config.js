@@ -19,6 +19,7 @@ module.exports = {
         inline: true,
         contentBase: "./dist",
         port: 8100,
+        hot: true,
         historyApiFallback: true
     },
     resolve: {
@@ -51,6 +52,7 @@ module.exports = {
                 removeAttributeQuotes: true
             }
         }),
+        new webpack.HotModuleReplacementPlugin(),
         new webpack.optimize.ModuleConcatenationPlugin()
     ]
 };
