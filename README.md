@@ -6,6 +6,10 @@ Run `npm install` in /app and /server
 To start app run `npm start` in /app
 To start server run `npm start` in /server
 
+#### Docker-compose WIP (Reloading not working)
+Install docker and docker-compose
+Then run `docker-compose up`
+
 ## App
 The web app for our project
 

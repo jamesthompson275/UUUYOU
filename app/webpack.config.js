@@ -18,9 +18,13 @@ module.exports = {
     devServer: {
         inline: true,
         contentBase: "./dist",
-        port: 8100,
+        host: "0.0.0.0",
+        port: 8080,
         hot: true,
-        historyApiFallback: true
+        historyApiFallback: true,
+        watchOptions: {
+            poll: 1000
+        }
     },
     resolve: {
         extensions: [".js"]
