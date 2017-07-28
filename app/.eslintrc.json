@@ -1,0 +1,67 @@
+{
+    "extends": "google",
+    "parserOptions": {
+        "ecmaVersion": 6,
+        "sourceType": "module",
+        "ecmaFeatures": {
+            "modules": true,
+            "experimentalObjectRestSpread": true
+        }
+    },
+    "rules": {
+        "comma-dangle": [
+            "error",
+            "never"
+        ],
+        "no-empty-label": "off",
+        "keyword-spacing": "error",
+        "no-mixed-spaces-and-tabs": "error",
+        "no-unused-vars": "off",
+        "arrow-body-style": [
+            "error",
+            "as-needed",
+            {
+                "requireReturnForObjectLiteral": true
+            }
+        ],
+        "indent": [
+            "error",
+            4
+        ],
+        "no-trailing-spaces": [
+            "error",
+            {
+                "skipBlankLines": true
+            }
+        ],
+        "linebreak-style": "off",
+        "quotes": [
+            "error",
+            "double",
+            {
+                "allowTemplateLiterals": true
+            }
+        ],
+        "require-jsdoc": "off",
+        "max-len": [
+            "error",
+            120,
+            {
+                "ignoreComments": true
+            }
+        ],
+        "object-curly-spacing": [
+            "error",
+            "always"
+        ],
+        "space-before-function-paren": [
+            "error",
+            {
+                "anonymous": "always",
+                "named": "never",
+                "asyncArrow": "ignore"
+            }
+        ],
+        "quote-props": "off"
+    }
+}
