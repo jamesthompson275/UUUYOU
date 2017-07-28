@@ -1,0 +1,6 @@
+app/node_modules
+server/node_modules
+server/npm-debug.log*
+app/npm-debug.log*
+app/dist/**
+server/dist/**
