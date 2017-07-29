@@ -1,8 +1,9 @@
-import sqlite from 'sqlite3'
-var db = new sqlite.Database('UUUYou.db')
+import sqlite from 'sqlite3';
 
 module.exports = {
     initialiseDb : function() {
+        var db = new sqlite.Database('UUUYou.db');
+
         db.serialize(function () {
             
             db.run("CREATE TABLE IF NOT EXISTS EventInfo (\
@@ -19,18 +20,26 @@ module.exports = {
                 outdoors INTEGER\
             )");
 
+            db.run("CREATE TABLE IF NOT EXISTS Venues (\
+                venueID TEXT PRIMARY KEY,\
+                venueType TEXT,\
+                address TEXT,\
+                latitude TEXT,\
+                longitude TEXT\
+            )");
+
             db.run("CREATE TABLE IF NOT EXISTS Parks (\
-                parkID INTEGER PRIMARY KEY,\
+                parkID TEXT PRIMARY KEY,\
                 name TEXT\
             )");
 
             db.run("CREATE TABLE IF NOT EXISTS Items (\
-                itemID INTEGER PRIMARY KEY,\
+                itemID TEXT PRIMARY KEY,\
                 type TEXT,\
                 label TEXT,\
-                latitude REAL,\
-                longitude REAL,\
-                park INTEGER,\
+                latitude TEXT,\
+                longitude TEXT,\
+                park TEXT,\
                 FOREIGN KEY(type) REFERENCES ItemTypes(itemTypeID),\
                 FOREIGN KEY(park) REFERENCES Parks(parkID)\
             )");
@@ -42,10 +51,8 @@ module.exports = {
                 use INTEGER DEFAULT 0\
             )");
 
+            console.log("Created DB tables");
         });
-    },
-    CloseDb : function() {
-         db.close();
     }
 }
 

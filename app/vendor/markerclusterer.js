@@ -1,8 +1,11 @@
+<<<<<<< HEAD
 // ==ClosureCompiler==
 // @compilation_level ADVANCED_OPTIMIZATIONS
 // @externs_url http://closure-compiler.googlecode.com/svn/trunk/contrib/externs/maps/google_maps_api_v3_3.js
 // ==/ClosureCompiler==
 
+=======
+>>>>>>> da35043fb53b151c609f78f5328427bb889e1bbe
 /**
  * @name MarkerClusterer for Google Maps v3
  * @version version 1.0.1
@@ -43,6 +46,7 @@
  *                cluster.
  *     'zoomOnClick': (boolean) Whether the default behaviour of clicking on a
  *                    cluster is to zoom into it.
+<<<<<<< HEAD
  *     'imagePath': (string) The base URL where the images representing
  *                  clusters will be found. The full URL will be:
  *                  {imagePath}[1-5].{imageExtension}
@@ -50,6 +54,8 @@
  *     'imageExtension': (string) The suffix for images URL representing
  *                       clusters will be found. See _imagePath_ for details.
  *                       Default: 'png'.
+=======
+>>>>>>> da35043fb53b151c609f78f5328427bb889e1bbe
  *     'averageCenter': (boolean) Whether the center of each cluster should be
  *                      the average of all markers in the cluster.
  *     'minimumClusterSize': (number) The minimum number of markers to be in a
@@ -519,12 +525,18 @@ MarkerClusterer.prototype.removeMarker = function(marker, opt_nodraw) {
  * @param {boolean=} opt_nodraw Optional boolean to force no redraw.
  */
 MarkerClusterer.prototype.removeMarkers = function(markers, opt_nodraw) {
+<<<<<<< HEAD
   // create a local copy of markers if required
   // (removeMarker_ modifies the getMarkers() array in place)
   var markersCopy = markers === this.getMarkers() ? markers.slice() : markers;
   var removed = false;
 
   for (var i = 0, marker; marker = markersCopy[i]; i++) {
+=======
+  var removed = false;
+
+  for (var i = 0, marker; marker = markers[i]; i++) {
+>>>>>>> da35043fb53b151c609f78f5328427bb889e1bbe
     var r = this.removeMarker_(marker);
     removed = removed || r;
   }
@@ -935,9 +947,15 @@ Cluster.prototype.remove = function() {
 
 
 /**
+<<<<<<< HEAD
  * Returns the number of markers in the cluster.
  *
  * @return {number} The number of markers in the cluster.
+=======
+ * Returns the center of the cluster.
+ *
+ * @return {number} The cluster center.
+>>>>>>> da35043fb53b151c609f78f5328427bb889e1bbe
  */
 Cluster.prototype.getSize = function() {
   return this.markers_.length;
@@ -945,9 +963,15 @@ Cluster.prototype.getSize = function() {
 
 
 /**
+<<<<<<< HEAD
  * Returns a list of the markers in the cluster.
  *
  * @return {Array.<google.maps.Marker>} The markers in the cluster.
+=======
+ * Returns the center of the cluster.
+ *
+ * @return {Array.<google.maps.Marker>} The cluster center.
+>>>>>>> da35043fb53b151c609f78f5328427bb889e1bbe
  */
 Cluster.prototype.getMarkers = function() {
   return this.markers_;
@@ -1256,6 +1280,7 @@ ClusterIcon.prototype.createCss = function(pos) {
       txtSize + 'px; font-family:Arial,sans-serif; font-weight:bold');
   return style.join('');
 };
+<<<<<<< HEAD
 
 
 // Export Symbols for Closure
@@ -1316,3 +1341,5 @@ Object.keys = Object.keys || function(o) {
     }  
     return result;  
 };
+=======
+>>>>>>> da35043fb53b151c609f78f5328427bb889e1bbe

@@ -4,7 +4,6 @@ import dbInit from "./db/dbInitialise.js";
 import dbUpdate from "./db/dbUpdate.js";
 
 dbInit.initialiseDb();
-dbInit.CloseDb();
 dbUpdate.readParkData();
 
 const PORT = 3000;

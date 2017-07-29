@@ -1,5 +1,6 @@
 let _Map = null;
-
+let _mapMarkers = [];
+let _markerCluster = null;
 
 function initMap() {
     
@@ -16,24 +17,33 @@ window.GoogleMap = {
     */
 	NewMap: (target, config) => {
         const { width, height, options } = config;
-        target.style.width = width + "px";
-        target.style.height = height + "px";
         
         _Map = new google.maps.Map(target, options);
-        console.log(_Map);
+        
+        _Map.addListener('mouseup', function() {
+            window.GoogleMap.AddMarkers();
+        });
+        window.addEventListener("resize", function() {
+            google.maps.event.trigger(_Map, "resize");
+        });
+        
     },
 	AddMarkers: () => {
         // Ping API endpoint
-        const {latitude, longitude } = _Map.getCameraPosition().target;
         window.API.GetMarkerLocations({
-            lat: latitude,
-            lng: longitude
+            lat: _Map.center.lat(),
+            lng: _Map.center.lng()
         })
         .then(newMarkers => {
-            const newMapMarkers = newMarkers.map(new google.maps.Marker);
-            const markerCluster = new MarkerClusterer(_Map,
-                newMapMarkers,
-                {imagePath: 'https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/m'}
+            if (_markerCluster) {
+                for (var i = 0; i < _mapMarkers.length; i++) {
+                    _markerCluster.removeMarker(_mapMarkers[i]);
+                }
+            }
+            _mapMarkers = newMarkers.map(x => new google.maps.Marker(x));
+            _markerCluster = new MarkerClusterer(_Map,
+                _mapMarkers,
+                { imagePath: 'https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/m' }
             );
         })
         .catch(err => {

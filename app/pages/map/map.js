@@ -2,11 +2,13 @@ const GoogleMap = window.GoogleMap;
 const NewMap = GoogleMap.NewMap;
 
 const mapPage = () => {
-    console.log("a");
     const mapContainer = document.getElementById("mapContainer");
+    const width = mapContainer.getBoundingClientRect().width;
+    const height = mapContainer.getBoundingClientRect().height;
+    console.log(width);
 	NewMap(mapContainer, {
-		width: 600,
-		height: 600,
+		width: width,
+		height: height,
 		options: {
 			zoom: 10,
 			center: {
@@ -21,6 +23,27 @@ const init = () => {
     setTimeout(function() {
         mapPage();
     }, 1000);
+    
+    let currentMessage = null;
+    setInterval(function() {
+        if (currentMessage) {
+            return;
+        }
+        
+        currentMessage = "Are you interested in x";
+        const openSnackbar = document.getElementById("openSnackbar");
+        const snackbar = new window.snackbar("bottom-right", currentMessage, 
+        2000,
+        () => {
+            console.log("yes");
+            currentMessage = "";
+        }, () => {
+            console.log("no");
+            currentMessage = "";
+        });
+        
+        snackbar.show();
+    }, 2500);
 };
 
 (function () {
