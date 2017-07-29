@@ -1,21 +1,56 @@
 html, body {
     padding: 0;
+    margin: 0;
     font-family: "Cabin", sans-serif;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+    font-size: 2em;
+    flex: 1;
+    text-align: center;
+    border-radius: 2px;
+}
+
+a:hover {
+    background-color: rgba(107,191,89,0.9);
+}
+
+a:active {
+    background-color: transparent;
+}
+
+video { 
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    min-width: 100%;
+    min-height: 100%;
+    width: auto;
+    height: auto;
+    z-index: -1;
+    transform: translateX(-50%) translateY(-50%);
+    background: url('//demosthenes.info/assets/images/polina.jpg') no-repeat;
+    background-size: cover;
+    transition: 1s opacity;
 }
 
 #navBar {
     display: flex;
     flex: 1;
+    align-items: center;
     justify-content: space-around;
     margin-bottom: 2em;
-    padding-bottom: 0.5em;
-    border-bottom: 1px solid #ddd;
+    padding: 0.5em 0;
+    background-color: rgba(107,191,89,0.9);
+    color: whitesmoke;
 }
 
 .snackbar {
     opacity: 0;
     z-index: 999999;
-    background-color: darkslategrey;
+    background-color: rgba(107,191,89,0.9);
     webkit-transition: opacity 0.5s, bottom 4s;
     transition: opacity 0.5s, bottom 4s;
     position: absolute;
@@ -46,13 +81,13 @@ html, body {
 .snackbarbutton {
     outline: none;
     background: transparent;
-    border: 2px solid salmon;
-    color: salmon;
+    border: 2px solid whitesmoke;
+    color: whitesmoke;
     border-radius: 2px;
 }
 
 .snackbarbutton:hover {
-    box-shadow: 2px 1px 0px salmon;
+    box-shadow: 2px 1px 0px whitesmoke;
     transform: translate(-2px, -2px);
 }
 
