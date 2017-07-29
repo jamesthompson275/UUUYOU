@@ -4,3 +4,4 @@ server/npm-debug.log*
 app/npm-debug.log*
 app/dist/**
 server/dist/**
+server/UUUYou.db
