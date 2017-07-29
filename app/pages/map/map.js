@@ -32,7 +32,7 @@ const init = () => {
         
         currentMessage = "Are you interested in x";
         const openSnackbar = document.getElementById("openSnackbar");
-        const snackbar = new window.snackbar("bottom-right", currentMessage, 
+        const snackbar = new window.snackbar("bottom-center", currentMessage, 
         2000,
         () => {
             console.log("yes");
