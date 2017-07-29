@@ -1,0 +1,13 @@
+.snackbar {
+    opacity: 0;
+    background-color: blue;
+    transition: all 2s;
+    position: absolute;
+    margin: auto;
+    width: 200px;
+}
+
+.bottom-center {
+    @extend .snackbar;
+    
+}
