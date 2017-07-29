@@ -1,8 +1,9 @@
-import sqlite from 'sqlite3'
-var db = new sqlite.Database('UUUYou.db')
+import sqlite from 'sqlite3';
 
 module.exports = {
     initialiseDb : function() {
+        var db = new sqlite.Database('UUUYou.db');
+
         db.serialize(function () {
             
             db.run("CREATE TABLE IF NOT EXISTS EventInfo (\
@@ -20,7 +21,7 @@ module.exports = {
             )");
 
             db.run("CREATE TABLE IF NOT EXISTS Parks (\
-                parkID INTEGER PRIMARY KEY,\
+                parkID TEXT PRIMARY KEY,\
                 name TEXT\
             )");
 
@@ -42,10 +43,8 @@ module.exports = {
                 use INTEGER DEFAULT 0\
             )");
 
+            console.log("Created DB tables");
         });
-    },
-    CloseDb : function() {
-         db.close();
     }
 }
 
