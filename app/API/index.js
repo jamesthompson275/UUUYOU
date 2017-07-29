@@ -1,7 +1,7 @@
 /**
 *	@return Promise<Object[]> Each Entry contains lat, lng, and label
 */
-const GetMarkerLocations = (lat, lng) => {
+const _GetMarkerLocations = (lat, lng) => {
 	return fetch(SERVER + "/markers", {
 		method: "POST",
 		body: {
@@ -11,5 +11,5 @@ const GetMarkerLocations = (lat, lng) => {
 }
 
 module.exports = {
-	GetMarkerLocations
+	GetMarkerLocations: _GetMarkerLocations
 }

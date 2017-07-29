@@ -1,11 +1,21 @@
-$background: darkslategrey;
-$color: whitesmoke;
-$distance: 20px;
+html, body {
+    padding: 0;
+    font-family: "Cabin", sans-serif;
+}
+
+#navBar {
+    display: flex;
+    flex: 1;
+    justify-content: space-around;
+    margin-bottom: 2em;
+    padding-bottom: 0.5em;
+    border-bottom: 1px solid #ddd;
+}
 
 .snackbar {
     opacity: 0;
     z-index: 999999;
-    background-color: $background;
+    background-color: darkslategrey;
     webkit-transition: opacity 0.5s, bottom 4s;
     transition: opacity 0.5s, bottom 4s;
     position: absolute;
@@ -17,7 +27,7 @@ $distance: 20px;
     margin: auto;
     width: 200px;
     border-radius: 2px;
-    color: $color;
+    color: whitesmoke;
     bottom: -50px;
     box-shadow: 0 3px 6px rgba(0,0,0,0.25), 0 3px 6px rgba(0,0,0,0.22);
 }
@@ -39,33 +49,32 @@ $distance: 20px;
     border: 2px solid salmon;
     color: salmon;
     border-radius: 2px;
-    &:hover {
-        box-shadow: 2px 1px 0px salmon;
-        transform: translate(-2px, -2px);
-    }
-    &:active {
-        box-shadow: none;
-        transform: none;
-    }
+}
+
+.snackbarbutton:hover {
+    box-shadow: 2px 1px 0px salmon;
+    transform: translate(-2px, -2px);
+}
+
+.snackbarbutton:active {
+    box-shadow: none;
+    transform: none;
 }
 
 .show-bottom {
     opacity: 1;
-    bottom: $distance;
+    bottom: 20px;
 }
 
 .bottom-center {
-    @extend .snackbar;
     right: 0;
     left: 0;
 }
 
 .bottom-left {
-    @extend .snackbar;
-    left: $distance;
+    left: 20px;
 }
 
 .bottom-right {
-    @extend .snackbar;
-    right: $distance;
+    right: 20px;
 }

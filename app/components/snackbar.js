@@ -1,4 +1,4 @@
-export default class {
+window.snackbar = class {
     constructor(
         position = "bottom-center",
         message = "Snackbar",
@@ -7,11 +7,11 @@ export default class {
         button2Click = () => this.hide()) {
 
         this.position = position;
-        this.duration = duration;    
+        this.duration = duration;
         
         this.snackbar = document.createElement("div");
         this.snackbar.setAttribute("id", "snackbar");
-        this.snackbar.classList.add["snackbar"];
+        this.snackbar.classList.add("snackbar");
         
         this.text = document.createElement("span");
         this.text.setAttribute("class", "snackbartext");
@@ -36,15 +36,12 @@ export default class {
         
         switch(this.position) {
             case "bottom-center":
-                this.snackbar.className = "";
                 this.snackbar.classList.add(this.position);
                 break;
             case "bottom-left":
-                this.snackbar.className = "";
                 this.snackbar.classList.add(this.position);
                 break;
             case "bottom-right":
-                this.snackbar.className = "";
                 this.snackbar.classList.add(this.position);
                 break;
             default:
@@ -52,11 +49,11 @@ export default class {
         }
     }
 
-    show = () => {
+    show() {
         this.snackbar.classList.add("show-bottom");
     }
 
-    hide = () => {
+    hide() {
         this.snackbar.classList.remove("show-bottom");
         setTimeout(() => {
             const root = document.getElementById("root");
