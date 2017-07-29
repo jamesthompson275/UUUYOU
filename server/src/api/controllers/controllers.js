@@ -1,4 +1,4 @@
-
+import sqlite from 'sqlite3';
 
 module.exports = {
 
@@ -21,4 +21,5 @@ function findAllNearbyItems(lat, long) {
     db.all(`SELECT * FROM Items WHERE latitude BETWEEN ${lat-0.02} AND ${lat+0.02} AND longitude BETWEEN ${long-0.02} AND ${long+0.02}`, function(err, rows) {
         return rows;
     });
+    db.close();
 }
