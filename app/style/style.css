@@ -1,0 +1,14 @@
+html, body {
+    padding: 0;
+    font-family: "Cabin", sans-serif;
+}
+
+
+#navBar {
+    display: flex;
+    flex: 1;
+    justify-content: space-around;
+    margin-bottom: 2em;
+    padding-bottom: 0.5em;
+    border-bottom: 1px solid #ddd;
+}
