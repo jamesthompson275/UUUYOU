@@ -19,7 +19,11 @@
         "url": "git+https://github.com/jamesthompson275/UUUYOU/issues"
     },
     "homepage": "git+https://github.com/jamesthompson275/UUUYOU#README",
-    "dependencies": {},
+    "dependencies": {
+        "google-maps": "^3.2.1",
+        "request": "^2.81.0",
+        "request-promise-native": "^1.0.4"
+    },
     "devDependencies": {
         "babel-core": "^6.25.0",
         "babel-loader": "^7.1.1",
