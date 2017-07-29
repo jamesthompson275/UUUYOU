@@ -51,6 +51,13 @@ module.exports = {
                 use INTEGER DEFAULT 0\
             )");
 
+            db.run("CREATE TABLE IF NOT EXISTS Reviews (\
+                reviewID INTEGER PRIMARY KEY,\
+                item TEXT,\
+                positive INTEGER,\
+                FOREIGN KEY(item) REFERENCES Items(itemID)\
+            )")
+
             console.log("Created DB tables");
         });
     }
