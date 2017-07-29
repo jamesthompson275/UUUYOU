@@ -1,4 +1,4 @@
-FROM mhart/alpine-node
+FROM mhart/alpine-node:8.1.2
 MAINTAINER Daniel Mitchell
 
 ENV DIR=/app \

@@ -1,7 +1,9 @@
 import "./styles/index.scss";
+import { Snackbar } from "./components";
 
 const start = () => {
-    console.log("UUUYOU");
+    const snackbar = new Snackbar();
+    snackbar.show();
 };
 
 const init = () => {
