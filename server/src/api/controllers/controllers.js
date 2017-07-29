@@ -55,7 +55,7 @@ function findAndReturnSingleRandomItem(res) {
     db.close();
 }
 
-function findAllNearbyItems(lat, lng, thresh, res) {
+function findAndReturnAllNearbyItems(lat, lng, thresh, res) {
     
     var db = new sqlite.Database('UUUYou.db');
     db.all(`SELECT * FROM Items WHERE latitude BETWEEN ${lat-thresh} AND ${lat+thresh} AND longitude BETWEEN ${lng-thresh} AND ${lng+thresh}`, function(err, rows) {
