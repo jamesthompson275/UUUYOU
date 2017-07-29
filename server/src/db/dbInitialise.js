@@ -26,12 +26,12 @@ module.exports = {
             )");
 
             db.run("CREATE TABLE IF NOT EXISTS Items (\
-                itemID INTEGER PRIMARY KEY,\
+                itemID TEXT PRIMARY KEY,\
                 type TEXT,\
                 label TEXT,\
-                latitude REAL,\
-                longitude REAL,\
-                park INTEGER,\
+                latitude TEXT,\
+                longitude TEXT,\
+                park TEXT,\
                 FOREIGN KEY(type) REFERENCES ItemTypes(itemTypeID),\
                 FOREIGN KEY(park) REFERENCES Parks(parkID)\
             )");
