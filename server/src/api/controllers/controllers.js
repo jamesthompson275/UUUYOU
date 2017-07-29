@@ -6,10 +6,10 @@ module.exports = {
 
         // get sent a lat, long, send all items near it
         app.get('/parkItems', function(req, res) {
-            var lat = req.body.lat;
-            var long = req.body.long;
+            var lat = req.query.lat;
+            var lng = req.query.lng;
 
-            var items = findAllNearbyItems(lat, long);
+            var items = findAllNearbyItems(lat, lng);
             res.send(JSON.stringify(items));
         });
     }
