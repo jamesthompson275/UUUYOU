@@ -41,7 +41,6 @@ video {
     flex: 1;
     align-items: center;
     justify-content: space-around;
-    margin-bottom: 2em;
     padding: 0.5em 0;
     background-color: rgba(107,191,89,0.9);
     color: whitesmoke;

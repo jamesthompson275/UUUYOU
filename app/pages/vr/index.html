@@ -1,33 +1,28 @@
-<!DOCTYPE html>
-<html lang="en">
-
+<html>
 <head>
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <script src="../../vendor/babel.min.js"></script>
+    
     <link href="../../style/style.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Cabin" rel="stylesheet">
     <link rel="icon" type="image/x-icon" href="../../assets/favicon.ico">
-    <title>UUUYOU</title>
+    <script src="https://aframe.io/releases/0.6.1/aframe.min.js"></script>
 </head>
-
-<body>
+<body style="height: 90%">
     <div id="root">
-        <video poster="../../assets/cello.png" id="bgvid" playsinline autoplay muted loop>
-            <source src="../../assets/cello.webm" type="video/webm">
-            <source src="../../assets/cello.mp4" type="video/mp4">
-        </video>
         <nav id="navBar">
-            <a href="index.html">Home</a>
+            <a href="../main/index.html">Home</a>
             <a href="../map/map.html">Get Engaged</a>
-            <a href="../vr/index.html">VR</a>
+            <a href="../index.html">VR</a>
             <a href="#">About</a>
         </nav>
-        <button id="openSnackbar">Show Snack</button>
+        <a-scene id="scene">
+            <a-plane position="0 0 -4" rotation="-90 0 0" width="100" height="100" color="#6BBF59"></a-plane>
+            <a-sky color="#BCD7CF"></a-sky>
+        </a-scene>
     </div>
     <script src="./index.js"></script>
-    <script src="../../components/snackbar.js"></script>
 </body>
-
 </html>
