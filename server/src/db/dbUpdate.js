@@ -29,7 +29,7 @@ module.exports = {
             if (err) throw new Error(err);
             const readStream = csv.fromString(res.body, {ignoreEmpty: true, headers: true, trim: true});
             readStream.on("data", function(data) {
-                //addParkItemDataToTable(data,db);
+                addParkItemDataToTable(data,db);
             });
         });
     }
@@ -62,7 +62,7 @@ function addParkDataToTable(data, db) {
 function addParkItemDataToTable(data, db) {
 
     let sql = 'INSERT OR IGNORE INTO Items VALUES (?,?,?,?,?,?)';
-    let dataString = `(${data["ITEM_ID"]},${data["ITEM_TYPE"]},${data["DESCRIPTION"]},${data["LATITUDE"]},${data["LONGITUDE"]},${data["PR_NO"]})`;
+    let dataString = `(${data["ITEM_ID"]},${data["ITEM_TYPE"]},${data["DESCRIPTION"].replace(/,/g, '')},${data["LATITUDE"]},${data["LONGITUDE"]},${data["PR_NO"]})`;
 
     db.run(sql, dataString, function(err) {
         if (err) {
