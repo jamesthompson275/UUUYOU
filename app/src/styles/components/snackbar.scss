@@ -1,13 +1,71 @@
+$background: darkslategrey;
+$color: whitesmoke;
+$distance: 20px;
+
 .snackbar {
     opacity: 0;
-    background-color: blue;
-    transition: all 2s;
+    z-index: 999999;
+    background-color: $background;
+    webkit-transition: opacity 0.5s, bottom 4s;
+    transition: opacity 0.5s, bottom 4s;
     position: absolute;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 10px;
     margin: auto;
     width: 200px;
+    border-radius: 2px;
+    color: $color;
+    bottom: -50px;
+    box-shadow: 0 3px 6px rgba(0,0,0,0.25), 0 3px 6px rgba(0,0,0,0.22);
+}
+
+.snackbartext {
+    padding-bottom: 5px;
+}
+
+.snackbarbuttons {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    width: 100%;
+}
+
+.snackbarbutton {
+    outline: none;
+    background: transparent;
+    border: 2px solid salmon;
+    color: salmon;
+    border-radius: 2px;
+    &:hover {
+        box-shadow: 2px 1px 0px salmon;
+        transform: translate(-2px, -2px);
+    }
+    &:active {
+        box-shadow: none;
+        transform: none;
+    }
+}
+
+.show-bottom {
+    opacity: 1;
+    bottom: $distance;
 }
 
 .bottom-center {
     @extend .snackbar;
-    
+    right: 0;
+    left: 0;
+}
+
+.bottom-left {
+    @extend .snackbar;
+    left: $distance;
+}
+
+.bottom-right {
+    @extend .snackbar;
+    right: $distance;
 }

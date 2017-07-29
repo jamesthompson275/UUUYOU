@@ -3,8 +3,11 @@ import { Snackbar } from "./components";
 import { NewMap } from "./js/GoogleMap";
 
 const start = () => {
-    const snackbar = new Snackbar();
-    snackbar.show();
+    const openSnackbar = document.getElementById("openSnackbar");
+    openSnackbar.addEventListener("click", () => {
+        const snackbar = new Snackbar("bottom-right");
+        snackbar.show();
+    });
     const mapContainer = document.createElement("div");
     document.body.appendChild(mapContainer);
     NewMap(mapContainer, {
