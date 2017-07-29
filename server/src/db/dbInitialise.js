@@ -1,32 +1,51 @@
 var sqlite = require('sqlite3').verbose()
 var db = new sqlite.Database('UUUYou.db')
 
-db.serialize(function () {
+module.exports = {
+    initialiseDb : function() {
+        db.serialize(function () {
+            
+            db.run("CREATE TABLE IF NOT EXISTS EventInfo (\
+                eventInfoID INTEGER PRIMARY KEY,\
+                title TEXT,\
+                label TEXT,\
+                cost TEXT,\
+                timeStart TEXT,\
+                timeStop TEXT,\
+                address TEXT,\
+                latitude REAL,\
+                longitude REAL,\
+                eventImage TEXT,\
+                outdoors INTEGER\
+            )");
 
-    db.run("CREATE TABLE IF NOT EXISTS ParkData (\
-        partDataID INTEGER PRIMARY KEY\
-    )");
-    
-    db.run("CREATE TABLE IF NOT EXISTS EventInfo (\
-        eventInfoID INTEGER PRIMARY KEY,\
-        title TEXT,\
-        description TEXT,\
-        cost TEXT,\
-        timeStart TYPE,\
-        timeStop TYPE,\
-        venue TEXT,\
-        venueAddress TEXT,\
-        eventImage TEXT,\
-        outdoors INTEGER\
-    )");
+            db.run("CREATE TABLE IF NOT EXISTS Parks (\
+                parkID INTEGER PRIMARY KEY,\
+                name TEXT\
+            )");
 
-    db.run("CREATE TABLE IF NOT EXISTS AddressLocation (\
-        addressLocationID INTEGER PRIMARY KEY,\
-        address TEXT,\
-        latitude REAL,\
-        longitude REAL\
-    )");
+            db.run("CREATE TABLE IF NOT EXISTS Items (\
+                itemID INTEGER PRIMARY KEY,\
+                type TEXT,\
+                label TEXT,\
+                latitude REAL,\
+                longitude REAL,\
+                park INTEGER,\
+                FOREIGN KEY(type) REFERENCES ItemTypes(itemTypeID),\
+                FOREIGN KEY(park) REFERENCES Parks(parkID)\
+            )");
 
-});
+            db.run("CREATE TABLE IF NOT EXISTS ItemTypes (\
+                itemTypeID TEXT PRIMARY KEY,\
+                description TEXT,\
+                quantity INTEGER,\
+                use INTEGER DEFAULT 0\
+            )");
 
-db.close();
+        });
+    },
+    CloseDb : function() {
+         db.close();
+    }
+}
+

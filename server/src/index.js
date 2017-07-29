@@ -1,5 +1,9 @@
 import express from "express";
 import cors from "cors";
+import dbInit from "./db/dbInitialise.js";
+
+dbInit.initialiseDb();
+dbInit.CloseDb();
 
 const PORT = 3000;
 
