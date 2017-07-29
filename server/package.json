@@ -4,7 +4,7 @@
     "description": "UUUYOU Server",
     "main": "src/index.js",
     "scripts": {
-        "start": "nodemon ./src/index.js --exec babel-node -e js",
+        "start": "babel-node ./src/index.js",
         "lint": "eslint ./src/**.js"
     },
     "repository": {
