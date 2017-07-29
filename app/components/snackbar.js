@@ -21,11 +21,21 @@ window.snackbar = class {
         this.button1 = document.createElement("button");
         this.button1.setAttribute("class", "snackbarbutton");
         this.button1.appendChild(document.createTextNode("YES"));
-        this.button1.addEventListener("click", button1Click);
+        
+        const hide = this.hide.bind(this);
+        this.button1.addEventListener("click", () => {
+            hide();
+            button1Click();
+        });
+        
         this.button2 = document.createElement("button");
         this.button2.setAttribute("class", "snackbarbutton");
         this.button2.appendChild(document.createTextNode("NO"));
-        this.button2.addEventListener("click", button2Click);
+        this.button2.addEventListener("click", () => {
+            hide();
+            button2Click();
+        });
+        
         this.buttons.appendChild(this.button1);
         this.buttons.appendChild(this.button2);
         this.snackbar.appendChild(this.text);

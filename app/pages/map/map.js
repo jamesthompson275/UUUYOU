@@ -23,6 +23,27 @@ const init = () => {
     setTimeout(function() {
         mapPage();
     }, 1000);
+    
+    let currentMessage = null;
+    setInterval(function() {
+        if (currentMessage) {
+            return;
+        }
+        
+        currentMessage = "Are you interested in x";
+        const openSnackbar = document.getElementById("openSnackbar");
+        const snackbar = new window.snackbar("bottom-right", currentMessage, 
+        2000,
+        () => {
+            console.log("yes");
+            currentMessage = "";
+        }, () => {
+            console.log("no");
+            currentMessage = "";
+        });
+        
+        snackbar.show();
+    }, 2500);
 };
 
 (function () {
