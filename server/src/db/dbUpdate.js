@@ -45,22 +45,28 @@ module.exports = {
 
 function addParkItemTypeData(data, db) {
 
-    let sql = 'INSERT OR IGNORE INTO ItemTypes VALUES (?,?,?,?)';
-    let dataString = `(${data["ITEM TYPE"]},${data["DESCRIPTION"]},${data["QTY"]},0)`;
+    let sql = 'INSERT OR IGNORE INTO ItemTypes VALUES ';
+    Object.keys(data).forEach(x => {
+        data[x] = data[x].replace(/["']/g, "");
+    });
+    sql += `("${data["ITEM TYPE"]}","${data["DESCRIPTION"]}","${data["QTY"]}",0)`;
 
-    db.run(sql, dataString, function(err) {
+    db.run(sql, function(err) {
         if (err) {
-            console.log(err);
+            throw new Error(err);
         }
     });
 }
 
 function addParkData(data, db) {
 
-    let sql = 'INSERT OR IGNORE INTO Parks VALUES (?,?)';
-    let dataString = `(${data["PR_NO"]},${data["PARK_NAME"]})`;
+    let sql = 'INSERT OR IGNORE INTO Parks VALUES ';
+    Object.keys(data).forEach(x => {
+        data[x] = data[x].replace(/["']/g, "");
+    });
+    sql += `("${data["PR_NO"]}","${data["PARK_NAME"]}")`;
     
-    db.run(sql, dataString, function(err) {
+    db.run(sql, function(err) {
         if (err) {
             throw new Error(err);
         }
@@ -69,10 +75,13 @@ function addParkData(data, db) {
 
 function addParkItemData(data, db) {
 
-    let sql = 'INSERT OR IGNORE INTO Items VALUES (?,?,?,?,?,?)';
-    let dataString = `(${data["ITEM_ID"]},${data["ITEM_TYPE"]},${data["DESCRIPTION"].replace(/,/g, '')},${data["LATITUDE"]},${data["LONGITUDE"]},${data["PR_NO"]})`;
+    let sql = 'INSERT OR IGNORE INTO Items VALUES ';
+    Object.keys(data).forEach(x => {
+        data[x] = data[x].replace(/["']/g, "");
+    });
+    sql += `("${data["ITEM_ID"]}","${data["ITEM_TYPE"]}","${data["DESCRIPTION"].replace(/,/g, '')}",${data["LATITUDE"]},${data["LONGITUDE"]},"${data["PR_NO"]}")`;
 
-    db.run(sql, dataString, function(err) {
+    db.run(sql, function(err) {
         if (err) {
             throw new Error(err);
         }
@@ -81,10 +90,13 @@ function addParkItemData(data, db) {
 
 function addVenueData(data, db) {
 
-    let sql = 'INSERT OR IGNORE INTO Venues VALUES (?,?,?,?,?)';
-    let dataString = `(${data["Venue Name"]},${data["Venue type"]},${data["Address"].replace(/,/g, ' ')},${data["Latitude"]},${data["Longitude"]})`;
+    let sql = 'INSERT OR IGNORE INTO Venues VALUES ';
+    Object.keys(data).forEach(x => {
+        data[x] = data[x].replace(/["']/g, "");
+    });
+    sql += `("${data["Venue Name"]}","${data["Venue type"]}","${data["Address"].replace(/,/g, ' ')}",${data["Latitude"]},${data["Longitude"]})`;
 
-    db.run(sql, dataString, function(err) {
+    db.run(sql, function(err) {
         if (err) {
             throw new Error(err);
         }

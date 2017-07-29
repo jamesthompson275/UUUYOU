@@ -24,8 +24,8 @@ module.exports = {
                 venueID TEXT PRIMARY KEY,\
                 venueType TEXT,\
                 address TEXT,\
-                latitude TEXT,\
-                longitude TEXT\
+                latitude REAL,\
+                longitude REAL\
             )");
 
             db.run("CREATE TABLE IF NOT EXISTS Parks (\
@@ -37,8 +37,8 @@ module.exports = {
                 itemID TEXT PRIMARY KEY,\
                 type TEXT,\
                 label TEXT,\
-                latitude TEXT,\
-                longitude TEXT,\
+                latitude REAL,\
+                longitude REAL,\
                 park TEXT,\
                 FOREIGN KEY(type) REFERENCES ItemTypes(itemTypeID),\
                 FOREIGN KEY(park) REFERENCES Parks(parkID)\

@@ -6,20 +6,20 @@ module.exports = {
 
         // get sent a lat, long, send all items near it
         app.get('/parkItems', function(req, res) {
-            var lat = req.body.lat;
-            var long = req.body.long;
+            let lat = +req.query.lat;
+            let lng = +req.query.lng;
+            let thresh = +req.query.thresh || 0.05;
 
-            var items = findAllNearbyItems(lat, long);
-            res.send(JSON.stringify(items));
+            findAndReturnAllNearbyItems(lat, lng, thresh, res);
         });
     }
 }
 
-function findAllNearbyItems(lat, long) {
-
+function findAllNearbyItems(lat, lng, thresh, res) {
+    
     var db = new sqlite.Database('UUUYou.db');
-    db.all(`SELECT * FROM Items WHERE latitude BETWEEN ${lat-0.02} AND ${lat+0.02} AND longitude BETWEEN ${long-0.02} AND ${long+0.02}`, function(err, rows) {
-        return rows;
+    db.all(`SELECT * FROM Items WHERE latitude BETWEEN ${lat-thresh} AND ${lat+thresh} AND longitude BETWEEN ${lng-thresh} AND ${lng+thresh}`, function(err, rows) {
+        res.send(JSON.stringify(rows));
     });
     db.close();
 }
