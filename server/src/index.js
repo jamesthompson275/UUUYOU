@@ -12,6 +12,10 @@ const server = express();
 
 server.use("*", cors({ origin: `http://localhost:${PORT}` }));
 
+server.configure(function(){
+  app.use(express.bodyParser());
+});
+
 server.get("/", (req, res) => {
     res.send("UUUYOU");
 });
