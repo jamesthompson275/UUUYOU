@@ -2,11 +2,13 @@ const GoogleMap = window.GoogleMap;
 const NewMap = GoogleMap.NewMap;
 
 const mapPage = () => {
-    console.log("a");
     const mapContainer = document.getElementById("mapContainer");
+    const width = mapContainer.getBoundingClientRect().width;
+    const height = mapContainer.getBoundingClientRect().height;
+    console.log(width);
 	NewMap(mapContainer, {
-		width: 600,
-		height: 600,
+		width: width,
+		height: height,
 		options: {
 			zoom: 10,
 			center: {
