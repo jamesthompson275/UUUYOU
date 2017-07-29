@@ -1,4 +1,4 @@
-var sqlite = require('sqlite3').verbose()
+import sqlite from 'sqlite3'
 var db = new sqlite.Database('UUUYou.db')
 
 module.exports = {
