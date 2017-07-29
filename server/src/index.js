@@ -7,7 +7,6 @@ import api from "./api/controllers/controllers.js";
 dbInit.initialiseDb();
 dbUpdate.readParkData();
 
-
 const PORT = 3000;
 
 const server = express();
