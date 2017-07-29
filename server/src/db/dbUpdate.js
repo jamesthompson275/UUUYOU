@@ -12,7 +12,7 @@ module.exports = {
             if (err) throw new Error(err);
             const readStream = csv.fromString(res.body, {ignoreEmpty: true, headers: true, trim: true});
             readStream.on("data", function(data) {
-                addParkItemTypeDataToTable(data, db);
+                addParkItemTypeData(data, db);
             })
         });
 
@@ -20,7 +20,7 @@ module.exports = {
             if (err) throw new Error(err);
             const readStream = csv.fromString(res.body, {ignoreEmpty: true, headers: true, trim: true});
             readStream.on("data", function(data) {
-                addParkDataToTable(data,db);
+                addParkData(data,db);
             });
         });
 
@@ -29,13 +29,21 @@ module.exports = {
             if (err) throw new Error(err);
             const readStream = csv.fromString(res.body, {ignoreEmpty: true, headers: true, trim: true});
             readStream.on("data", function(data) {
-                addParkItemDataToTable(data,db);
+                addParkItemData(data,db);
+            });
+        });
+
+        request("https://www.data.brisbane.qld.gov.au/data/dataset/706724ed-ca3a-494a-a92e-2def5a58478b/resource/08107e61-5960-4b3c-a9c9-468d6d295020/download/BrisbaneCityCouncilEventsVenueLocations20170530.csv", (err, res) => {
+            if (err) throw new Error(err);
+            const readStream = csv.fromString(res.body, {ignoreEmpty: true, headers: true, trim: true});
+            readStream.on("data", function(data) {
+                addVenueData(data,db);
             });
         });
     }
 }
 
-function addParkItemTypeDataToTable(data, db) {
+function addParkItemTypeData(data, db) {
 
     let sql = 'INSERT OR IGNORE INTO ItemTypes VALUES (?,?,?,?)';
     let dataString = `(${data["ITEM TYPE"]},${data["DESCRIPTION"]},${data["QTY"]},0)`;
@@ -47,7 +55,7 @@ function addParkItemTypeDataToTable(data, db) {
     });
 }
 
-function addParkDataToTable(data, db) {
+function addParkData(data, db) {
 
     let sql = 'INSERT OR IGNORE INTO Parks VALUES (?,?)';
     let dataString = `(${data["PR_NO"]},${data["PARK_NAME"]})`;
@@ -59,7 +67,7 @@ function addParkDataToTable(data, db) {
     });
 }
 
-function addParkItemDataToTable(data, db) {
+function addParkItemData(data, db) {
 
     let sql = 'INSERT OR IGNORE INTO Items VALUES (?,?,?,?,?,?)';
     let dataString = `(${data["ITEM_ID"]},${data["ITEM_TYPE"]},${data["DESCRIPTION"].replace(/,/g, '')},${data["LATITUDE"]},${data["LONGITUDE"]},${data["PR_NO"]})`;
@@ -69,4 +77,16 @@ function addParkItemDataToTable(data, db) {
             throw new Error(err);
         }
     });
+}
+
+function addVenueData(data, db) {
+
+    let sql = 'INSERT OR IGNORE INTO Venues VALUES (?,?,?,?,?)';
+    let dataString = `(${data["Venue Name"]},${data["Venue type"]},${data["Address"].replace(/,/g, ' ')},${data["Latitude"]},${data["Longitude"]})`;
+
+    db.run(sql, dataString, function(err) {
+        if (err) {
+            throw new Error(err);
+        }
+    });    
 }

@@ -20,6 +20,14 @@ module.exports = {
                 outdoors INTEGER\
             )");
 
+            db.run("CREATE TABLE IF NOT EXISTS Venues (\
+                venueID TEXT PRIMARY KEY,\
+                venueType TEXT,\
+                address TEXT,\
+                latitude TEXT,\
+                longitude TEXT\
+            )");
+
             db.run("CREATE TABLE IF NOT EXISTS Parks (\
                 parkID TEXT PRIMARY KEY,\
                 name TEXT\
