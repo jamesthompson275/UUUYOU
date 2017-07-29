@@ -20,9 +20,7 @@
     },
     "homepage": "git+https://github.com/jamesthompson275/UUUYOU#README",
     "dependencies": {
-        "google-maps": "^3.2.1",
-        "request": "^2.81.0",
-        "request-promise-native": "^1.0.4"
+        "google-maps": "^3.2.1"
     },
     "devDependencies": {
         "babel-core": "^6.25.0",
