@@ -2,8 +2,8 @@ import fs from 'fs';
 import csv from 'fast-csv';
 import request from "request";
 import sqlite from 'sqlite3';
-const htmlparser = require("htmlparser");
-const request = require("request");
+import htmlparser from "htmlparser";
+
 const feeds = [
     "http://www.trumba.com/calendars/brisbane-city-council.rss",
     "http://www.trumba.com/calendars/events-in-brisbane.rss",
@@ -100,7 +100,7 @@ const readBCCRSS = function () {
                             }
                         }
                     }
-                    if (eventInfo["venue"] == "") {
+                    if (eventInfo["venue"] == "" || eventInfo["timeStart"] == "") {
                         continue;
                     } else {
                         //ADD eventInfo to DB

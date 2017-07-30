@@ -7,17 +7,23 @@ module.exports = {
         db.serialize(function () {
             
             db.run("CREATE TABLE IF NOT EXISTS EventInfo (\
-                eventInfoID INTEGER PRIMARY KEY,\
                 title TEXT,\
-                label TEXT,\
+                description TEXT,\
                 cost TEXT,\
                 timeStart TEXT,\
                 timeStop TEXT,\
-                address TEXT,\
-                latitude REAL,\
-                longitude REAL,\
+                venue TEXT,\
+                venueAddress TEXT,\
                 eventImage TEXT,\
-                outdoors INTEGER\
+                bookings TEXT,\
+                category TEXT,\
+                weblink TEXT,\
+                age TEXT,\
+                meetTEXTingPoint TEXT,\
+                requirements TEXT,\
+                showType TEXT,\
+                schedule TEXT,\
+                PRIMARY KEY (title, timeStart, venue)\
             )");
 
             db.run("CREATE TABLE IF NOT EXISTS Venues (\
