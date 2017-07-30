@@ -29,11 +29,10 @@ const doMarkers = newMarkers => {
     _mapMarkers = newMarkers.map(x => {
         const m = new google.maps.Marker(x);
         m.addListener('click', function(e) {
-            if (_Map.getZoom() >= 17) {
+            if (_Map.getZoom() >= 15) {
                 // SHOW VR
-                console.log("SHOW VR");
-                e.preventDefault();
-                
+                Show_VR(x.park);
+                //e.preventDefault();
             }
         });
         return m;
@@ -101,7 +100,8 @@ window.GoogleMap = {
                      lat: +x.latitude,
                      lng: +x.longitude
                 },
-                label: label
+                label: label,
+                park: x.park
             }
         }))
         .then(x => {
