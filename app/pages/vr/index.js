@@ -1,6 +1,6 @@
 const start = async () => {
     try {
-        const parkId = getParameterByName("park") ? getParameterByName("park") : "D1979";
+        const parkId = getParameterByName("park") ? getParameterByName("park") : "D2177";
         const data = await fetch(`http://greensland.space/parkItems?id='${parkId}'`);
         const json = await data.json();
         const list = json.map((item) => ({
@@ -44,7 +44,6 @@ const start = async () => {
             if (item.type.toLowerCase().indexOf("bench") >= 0) {
                 const bench = document.createElement("a-obj-model");
                 bench.setAttribute("position", item.position);
-                bench.setAttribute("rotation", "0 90 0");
                 bench.setAttribute("src", "#bench-obj");
                 bench.setAttribute("mtl", "#bench-mtl");
                 scene.appendChild(bench);
@@ -56,6 +55,15 @@ const start = async () => {
                 swing.setAttribute("mtl", "#swing-mtl");
                 swing.setAttribute("scale", "0.2 0.2 0.2");
                 scene.appendChild(swing);
+            } else if(item.type.toLowerCase().indexOf("fitness exercise") >= 0) {
+                const swing = document.createElement("a-obj-model");
+                swing.setAttribute("position", item.position);
+                swing.setAttribute("src", "#gym-obj");
+                swing.setAttribute("mtl", "#gym-mtl");
+                swing.setAttribute("scale", "0.05 0.05 0.05");
+                scene.appendChild(swing);
+            } else if(item.type.toLowerCase().indexOf("path") >= 0) {
+
             } else {
                 const box = document.createElement("a-box");
                 box.setAttribute("position", item.position);
