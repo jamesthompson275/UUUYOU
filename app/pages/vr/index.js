@@ -1,6 +1,7 @@
 const start = async () => {
     try {
-        const data = await fetch("http://greensland.space/parkItems?id='D1979'");
+        const parkId = getParameterByName("park") ? getParameterByName("park") : "D0065";
+        const data = await fetch(`http://greensland.space/parkItems?id='${parkId}'`);
         const json = await data.json();
         const list = json.map((item) => ({
             lat: item.latitude,
@@ -21,11 +22,13 @@ const start = async () => {
 
         const camera = document.getElementById("camera");
         const plane = document.getElementById("plane");
-        camera.setAttribute("position", `${(maxLat - minLat) * 50000} 0 ${(maxLng - minLng) * 50000}`);
-        plane.setAttribute("position", `${(maxLat - minLat) * 50000} 0 ${(maxLng - minLng) * 50000}`);
-        plane.setAttribute("width", (maxLat - minLat) * 100000);
-        plane.setAttribute("height", (maxLng - minLng) * 100000);
-        console.log((maxLat - minLat) * 10000);
+        const width = (maxLat - minLat) * 100000;
+        const height = (maxLng - minLng) * 100000;
+        camera.setAttribute("position", `${width / 2} 0 ${height / 2}`);
+        camera.setAttribute("wasd-controls", `acceleration: ${Math.sqrt(width ** 2 + height ** 2) / 10}`);
+        plane.setAttribute("position", `${width / 2} 0 ${height / 2}`);
+        plane.setAttribute("width", width);
+        plane.setAttribute("height", height);
 
         const mappedList = list.map((item) => {
             const latTrans = (Math.abs(item.lat) - minLat);
@@ -43,7 +46,6 @@ const start = async () => {
             if (item.type.toLowerCase().indexOf("bench") >= 0) {
                 const bench = document.createElement("a-obj-model");
                 bench.setAttribute("position", item.position);
-                bench.setAttribute("rotation", "0 90 0");
                 bench.setAttribute("src", "#bench-obj");
                 bench.setAttribute("mtl", "#bench-mtl");
                 scene.appendChild(bench);
@@ -55,6 +57,15 @@ const start = async () => {
                 swing.setAttribute("mtl", "#swing-mtl");
                 swing.setAttribute("scale", "0.2 0.2 0.2");
                 scene.appendChild(swing);
+            } else if(item.type.toLowerCase().indexOf("fitness exercise") >= 0) {
+                const swing = document.createElement("a-obj-model");
+                swing.setAttribute("position", item.position);
+                swing.setAttribute("src", "#gym-obj");
+                swing.setAttribute("mtl", "#gym-mtl");
+                swing.setAttribute("scale", "0.05 0.05 0.05");
+                scene.appendChild(swing);
+            } else if(item.type.toLowerCase().indexOf("path") >= 0) {
+
             } else {
                 const box = document.createElement("a-box");
                 box.setAttribute("position", item.position);
@@ -67,6 +78,16 @@ const start = async () => {
         console.log(err);
     }
 }
+
+const getParameterByName = (name, url) => {
+    if (!url) url = window.location.href;
+    name = name.replace(/[\[\]]/g, "\\$&");
+    var regex = new RegExp("[?&]" + name + "(=([^&#]*)|&|#|$)"),
+        results = regex.exec(url);
+    if (!results) return null;
+    if (!results[2]) return '';
+    return decodeURIComponent(results[2].replace(/\+/g, " "));
+};
 
 const init = () => {
     start();
