@@ -2,3 +2,21 @@
     width: 100%;
     height: 600px;
 }
+#map {
+    height: 100%;
+    width: 100%;
+}
+#mapCheckboxes {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+}
+#mapCheckboxes h1 {
+    width: 100%;
+}
+#mapCheckboxes > div {
+    width: 25%;
+}
+#snack {
+    position: relative;
+}
