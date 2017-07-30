@@ -93,7 +93,7 @@ window.GoogleMap = {
             return x;
         })
         .then(response => response.map(x => {
-            const label = _Map.getZoom() >= 17 ? x.label : x.parkName;
+            const label = _Map.getZoom() >= 17 ? x.label : x.name;
             return {
                  position: {
                      lat: +x.latitude,
