@@ -1,5 +1,6 @@
 window.snackbar = class {
     constructor(
+        target,
         position = "bottom-center",
         message = "Snackbar",
         duration = 2000,
@@ -41,8 +42,7 @@ window.snackbar = class {
         this.snackbar.appendChild(this.text);
         this.snackbar.appendChild(this.buttons);
         
-        const root = document.getElementById("root");
-        root.appendChild(this.snackbar);
+        target.appendChild(this.snackbar);
         
         switch(this.position) {
             case "bottom-center":
@@ -66,8 +66,8 @@ window.snackbar = class {
     hide() {
         this.snackbar.classList.remove("show-bottom");
         setTimeout(() => {
-            const root = document.getElementById("root");
-            root.removeChild(this.snackbar);
-        })
+            const parent = this.snackbar.parentNode;
+            parent.removeChild(this.snackbar);
+        }, 10)
     }
 }

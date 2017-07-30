@@ -19,7 +19,7 @@ module.exports = {
                 category TEXT,\
                 weblink TEXT,\
                 age TEXT,\
-                meetTEXTingPoint TEXT,\
+                meetingPoint TEXT,\
                 requirements TEXT,\
                 showType TEXT,\
                 schedule TEXT,\
