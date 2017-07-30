@@ -5,7 +5,6 @@ const mapPage = () => {
     const mapContainer = document.getElementById("mapContainer");
     const width = mapContainer.getBoundingClientRect().width;
     const height = mapContainer.getBoundingClientRect().height;
-    console.log(width);
 	NewMap(document.getElementById("map"), {
 		width: width,
 		height: height,
@@ -19,6 +18,23 @@ const mapPage = () => {
     })
 }
 
+function Show_VR(itemID) {
+    document.getElementById("snack").style.display = "none";
+    
+    const vr = document.getElementById("vr");
+    vr.style.display = "block";
+    vr.src = "../vr/index.html?park=" + itemID;
+    vr.addEventListener("load", function() {
+        vr.contentWindow.document.addEventListener("keyup", function(e) {
+            if (e.keyCode == 27) {
+                document.getElementById("snack").style.display = "block";
+                document.getElementById("vr").style.display = "none";
+            }
+        });
+    });
+    
+}
+
 const init = () => {
     setTimeout(function() {
         mapPage();
@@ -27,7 +43,11 @@ const init = () => {
     let currentMessage = undefined;
     let timeout = 2500;
     const n = function() {
-        if (currentMessage === undefined) {
+        const openSnackbar = document.getElementById("snack");
+        console.log(openSnackbar.style.display);
+        if (openSnackbar.style.display == "none") {
+            return setTimeout(n, timeout);
+        } else if (currentMessage === undefined) {
             currentMessage =  GoogleMap.GetRandom();
             if (currentMessage === undefined) {
                 setTimeout(n, timeout);
@@ -41,7 +61,6 @@ const init = () => {
         }
         
         
-        const openSnackbar = document.getElementById("snack");
         const snackbar = new window.snackbar(document.getElementById("snack"), "bottom-center", "Are you interested in " + currentMessage.original.type, 
         2000,
         () => {
