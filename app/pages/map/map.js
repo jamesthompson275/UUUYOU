@@ -6,7 +6,7 @@ const mapPage = () => {
     const width = mapContainer.getBoundingClientRect().width;
     const height = mapContainer.getBoundingClientRect().height;
     console.log(width);
-	NewMap(mapContainer, {
+	NewMap(document.getElementById("map"), {
 		width: width,
 		height: height,
 		options: {
@@ -24,15 +24,22 @@ const init = () => {
         mapPage();
     }, 1000);
     
-    let currentMessage = null;
+    let currentMessage = undefined;
     setInterval(function() {
-        if (currentMessage) {
+        if (currentMessage === undefined) {
+            currentMessage =  GoogleMap.GetRandom();
+            if (currentMessage === undefined) {
+                return;
+            }
+        } else if (currentMessage != "") {
             return;
+        } else {
+            currentMessage =  GoogleMap.GetRandom();
         }
         
-        currentMessage = "Are you interested in x";
-        const openSnackbar = document.getElementById("openSnackbar");
-        const snackbar = new window.snackbar("bottom-center", currentMessage, 
+        
+        const openSnackbar = document.getElementById("snack");
+        const snackbar = new window.snackbar(document.getElementById("snack"), "bottom-center", "Are you interested in " + currentMessage.type, 
         2000,
         () => {
             console.log("yes");
