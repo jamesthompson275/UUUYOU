@@ -25,15 +25,11 @@ module.exports = {
         })
 
         app.get('/randomItemToReview', function(req, res) {
-            findAndReturnSingleRandomItem(res);
-        });
-
-        app.post('/randomItemToReview', function(req, res) {
-            let itemID = req.body.id;
-            let positive = req.body.positive;
-
+            let itemID = req.query.id;
+            let positive = req.query.positive;
             saveReview(itemID, positive, res);
         });
+
     }
 }
 
@@ -64,14 +60,23 @@ function findAndReturnSingleRandomItem(res) {
 function findAndReturnAllNearbyItems(lat, lng, thresh, res) {
     
     var db = new sqlite.Database('UUUYou.db');
-    var stuffToSend = []
+    var stuffToSend = [];
+
     db.all(`SELECT * FROM Items INNER JOIN Parks ON Parks.parkID = Items.park WHERE Items.latitude BETWEEN ${lat-thresh} AND ${lat+thresh} AND Items.longitude BETWEEN ${lng-thresh} AND ${lng+thresh}`, function(err, rows) {
-        stuffToSend.push(JSON.stringify(rows));
+        stuffToSend.push(rows);
     });
-    db.all(`SELECT * FROM EventInfo INNER JOIN Venue ON Venues.venueID = EventInfo.venue WHERE Venues.latitude BETWEEN ${lat-thresh} AND ${lat+thresh} AND Venues.longitude BETWEEN ${lng-thresh} AND ${lng+thresh}`, function(err, rows) {
-        stuffToSend.push(JSON.stringify(rows));
+
+    db.all(`SELECT * FROM EventInfo INNER JOIN Venues ON Venues.venueID = EventInfo.venue WHERE Venues.latitude BETWEEN ${lat-thresh} AND ${lat+thresh} AND Venues.longitude BETWEEN ${lng-thresh} AND ${lng+thresh}`, function(err, rows) {
+        stuffToSend.push(rows);
     });
-    res.send(stuffToSend);
+function n() {
+	if (stuffToSend.length != 2) {
+		setTimeout(n, 500);
+	} else {
+		res.send(JSON.stringify((stuffToSend[0] || []).concat(stuffToSend[1])));
+	}
+}
+	n();
     db.close();
 }
 

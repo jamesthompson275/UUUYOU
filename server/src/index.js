@@ -4,9 +4,9 @@ import dbInit from "./db/dbInitialise.js";
 import dbUpdate from "./db/dbUpdate.js";
 import {setupRestApiGet} from "./api/controllers/controllers";
 
-dbInit.initialiseDb();
-dbUpdate.readParkData();
-dbUpdate.readBCCRSS();
+// dbInit.initialiseDb();
+// dbUpdate.readParkData();
+// dbUpdate.readBCCRSS();
 
 
 const PORT = 3000;
