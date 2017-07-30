@@ -63,7 +63,7 @@ function findAndReturnSingleRandomItem(res) {
 function findAndReturnAllNearbyItems(lat, lng, thresh, res) {
     
     var db = new sqlite.Database('UUUYou.db');
-    db.all(`SELECT * FROM Items WHERE latitude BETWEEN ${lat-thresh} AND ${lat+thresh} AND longitude BETWEEN ${lng-thresh} AND ${lng+thresh}`, function(err, rows) {
+    db.all(`SELECT * FROM Items INNER JOIN Parks ON Parks.parkID = Items.park WHERE Items.latitude BETWEEN ${lat-thresh} AND ${lat+thresh} AND Items.longitude BETWEEN ${lng-thresh} AND ${lng+thresh}`, function(err, rows) {
         res.send(JSON.stringify(rows));
     });
     db.close();
