@@ -1,6 +1,6 @@
 const start = async () => {
     try {
-        const parkId = getParameterByName("park") ? getParameterByName("park") : "D2177";
+        const parkId = getParameterByName("park") ? getParameterByName("park") : "D0065";
         const data = await fetch(`http://greensland.space/parkItems?id='${parkId}'`);
         const json = await data.json();
         const list = json.map((item) => ({
@@ -22,11 +22,13 @@ const start = async () => {
 
         const camera = document.getElementById("camera");
         const plane = document.getElementById("plane");
-        camera.setAttribute("position", `${(maxLat - minLat) * 50000} 0 ${(maxLng - minLng) * 50000}`);
-        plane.setAttribute("position", `${(maxLat - minLat) * 50000} 0 ${(maxLng - minLng) * 50000}`);
-        plane.setAttribute("width", (maxLat - minLat) * 100000);
-        plane.setAttribute("height", (maxLng - minLng) * 100000);
-        console.log((maxLat - minLat) * 10000);
+        const width = (maxLat - minLat) * 100000;
+        const height = (maxLng - minLng) * 100000;
+        camera.setAttribute("position", `${width / 2} 0 ${height / 2}`);
+        camera.setAttribute("wasd-controls", `acceleration: ${Math.sqrt(width ** 2 + height ** 2) / 10}`);
+        plane.setAttribute("position", `${width / 2} 0 ${height / 2}`);
+        plane.setAttribute("width", width);
+        plane.setAttribute("height", height);
 
         const mappedList = list.map((item) => {
             const latTrans = (Math.abs(item.lat) - minLat);
