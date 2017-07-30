@@ -25,13 +25,16 @@ const init = () => {
     }, 1000);
     
     let currentMessage = undefined;
-    setInterval(function() {
+    let timeout = 2500;
+    const n = function() {
         if (currentMessage === undefined) {
             currentMessage =  GoogleMap.GetRandom();
             if (currentMessage === undefined) {
+                setTimeout(n, timeout);
                 return;
             }
         } else if (currentMessage != "") {
+            setTimeout(n, timeout);
             return;
         } else {
             currentMessage =  GoogleMap.GetRandom();
@@ -39,18 +42,24 @@ const init = () => {
         
         
         const openSnackbar = document.getElementById("snack");
-        const snackbar = new window.snackbar(document.getElementById("snack"), "bottom-center", "Are you interested in " + currentMessage.type, 
+        const snackbar = new window.snackbar(document.getElementById("snack"), "bottom-center", "Are you interested in " + currentMessage.original.type, 
         2000,
         () => {
-            console.log("yes");
+            GoogleMap.GoTo(currentMessage.marker);
             currentMessage = "";
+            timeout = 10000;
+            setTimeout(n, timeout);
         }, () => {
             console.log("no");
             currentMessage = "";
+            timeout = 50;
+            setTimeout(n, timeout);
         });
         
         snackbar.show();
-    }, 2500);
+        
+    }
+    setTimeout(n, timeout);
 };
 
 (function () {

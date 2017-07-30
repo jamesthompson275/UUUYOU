@@ -64,10 +64,6 @@ window.GoogleMap = {
             lng: _Map.center.lng(),
             threshold: Math.min(Math.max(Math.abs(north - south), Math.abs(west - east)), 0.1)
         })
-        .then(x => {
-            serverData  = x.slice();
-            return x;
-        })
         .then(response => response.reduce((carry, item) => {
             if (_Map.getZoom() >= 17) {
                 carry.push(item);
@@ -79,6 +75,10 @@ window.GoogleMap = {
             }
             return carry;
         }, []))
+        .then(x => {
+            serverData  = x.slice();
+            return x;
+        })
         .then(response => response.map(x => {
             const label = _Map.getZoom() >= 17 ? x.label : x.park;
             return {
@@ -129,10 +129,19 @@ window.GoogleMap = {
             throw new Error(err)
         });
     },
-    
+    GoTo: to => {
+        _Map.setCenter(to.getPosition());
+        _Map.setZoom(19);
+        window.GoogleMap.AddMarkers();
+    },
     GetRandom: () => {
+        
         if (serverData.length) {
-            return serverData[Math.floor(Math.random() * serverData.length)];
+            const i = Math.floor(Math.random() * serverData.length);
+            return {
+                original: serverData[i],
+                marker: _mapMarkers[i]
+            };
         }
     }
 }
