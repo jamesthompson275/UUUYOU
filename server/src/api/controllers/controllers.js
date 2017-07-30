@@ -49,6 +49,7 @@ function saveReview(itemID, positive, res) {
         }
     });
     res.sendStatus(201);
+    db.close();
 }
 
 function findAndReturnSingleRandomItem(res) {

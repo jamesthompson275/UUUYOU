@@ -224,7 +224,7 @@ function addParkItemData(data, db) {
     Object.keys(data).forEach(x => {
         data[x] = data[x].replace(/["']/g, "");
     });
-    stmt.run(`(${data["ITEM_ID"]}`, `${data["ITEM_TYPE"]}`, `${data["DESCRIPTION"].replace(/,/g, '')}`, `${data["LATITUDE"]}`,
+    stmt.run(`${data["ITEM_ID"]}`, `${data["ITEM_TYPE"]}`, `${data["DESCRIPTION"].replace(/,/g, '')}`, `${data["LATITUDE"]}`,
         `${data["LONGITUDE"]}`, `${data["PR_NO"]}`);
     stmt.finalize();
 }
