@@ -16,7 +16,7 @@ module.exports = {
         app.get('/parkItems', function(req, res) {
             let parkID = req.query.id;
 
-            findAndReturnSingleAllPark(parkID, res);
+            findAndReturnSingleParkAllItems(parkID, res);
         });
 
         app.get('/randomItemToReview', function(req, res) {
