@@ -1,4 +1,4 @@
-const _SERVER = "//greensland.space/"
+const _SERVER = "//greensland.space/api/"
 window.API = {
     /**
     *	@return Promise<Object[]> Each Entry contains lat, lng, and label
