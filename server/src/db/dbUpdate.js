@@ -3,6 +3,7 @@ import csv from 'fast-csv';
 import request from "request";
 import sqlite from 'sqlite3';
 import htmlparser from "htmlparser";
+import async from "async";
 
 const feeds = [
     "http://www.trumba.com/calendars/brisbane-city-council.rss",
@@ -25,10 +26,10 @@ const feeds = [
 ];
 
 const readBCCRSS = function () {
-
-
+    let output = [];
+    let urlcount = 0;
     const parserHandler = new htmlparser.DefaultHandler(function (err, dom) {
-        
+
         if (err) {
             throw new Error(err);
         }
@@ -101,28 +102,42 @@ const readBCCRSS = function () {
             if (eventInfo["venue"] == "" || eventInfo["timeStart"] == "") {
                 continue;
             } else {
-                setTimeout(() => {
-const db = new sqlite.Database('UUUYou.db');
-                addEventInfoData(eventInfo, db);
-                db.close();
-                }, 500);
+                output.push(eventInfo)
+
             }
         }
-        
-        console.log("Done an RSS");
     });
     const parser = new htmlparser.Parser(parserHandler);
-    for (let url of feeds) {
-        request(url, function (err, res) {
-            if (err) {
-                throw new Error(err);
+    const bodies = []
+    async.whilst(function () { return urlcount < feeds.length; },
+        function (callback) {
+            let url = feeds[urlcount];
+            request(url, function (err, res) {
+                if (err) {
+                    console.log(url)
+                    throw new Error(err);
+                }
+                bodies.push(res.body);
+                urlcount++;
+                console.log(urlcount);
+                callback(null, urlcount);
+            });
+        },
+        function (err) {
+            console.log("Done RSS Requests");
+            for (var rawHtml of bodies) {
+                parser.parseComplete(rawHtml);
+                console.log(output.length);
             }
-            const rawHtml = res.body;
+            const db = new sqlite.Database('UUUYou.db');
+            for (let eventInfo of output) {
 
-            parser.parseComplete(rawHtml);
-            console.log(url);
+                addEventInfoData(eventInfo, db);
+
+            }
+            db.close();
+            console.log("Events Added");
         });
-    }
 };
 
 
