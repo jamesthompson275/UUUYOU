@@ -189,7 +189,7 @@ function addParkItemTypeData(data, db) {
     Object.keys(data).forEach(x => {
         data[x] = data[x].replace(/["']/g, "");
     });
-    stmt.run(`"${data["ITEM TYPE"]}"`, `"${data["DESCRIPTION"]}"`, `"${data["QTY"]}"`, 0);
+    stmt.run(`${data["ITEM TYPE"]}`, `${data["DESCRIPTION"]}`, `${data["QTY"]}`, 0);
     stmt.finalize();
 }
 
@@ -199,7 +199,7 @@ function addParkData(data, db) {
     Object.keys(data).forEach(x => {
         data[x] = data[x].replace(/["']/g, "");
     });
-    stmt.run(`"${data["PR_NO"]}"`, `"${data["PARK_NAME"]}"`);
+    stmt.run(`${data["PR_NO"]}`, `${data["PARK_NAME"]}`);
     stmt.finalize();
 }
 
@@ -209,8 +209,8 @@ function addParkItemData(data, db) {
     Object.keys(data).forEach(x => {
         data[x] = data[x].replace(/["']/g, "");
     });
-    stmt.run(`("${data["ITEM_ID"]}"`, `"${data["ITEM_TYPE"]}"`, `"${data["DESCRIPTION"].replace(/,/g, '')}"`, `${data["LATITUDE"]}`,
-        `${data["LONGITUDE"]}`, `"${data["PR_NO"]}"`);
+    stmt.run(`(${data["ITEM_ID"]}`, `${data["ITEM_TYPE"]}`, `${data["DESCRIPTION"].replace(/,/g, '')}`, `${data["LATITUDE"]}`,
+        `${data["LONGITUDE"]}`, `${data["PR_NO"]}`);
     stmt.finalize();
 }
 
@@ -220,7 +220,7 @@ function addVenueData(data, db) {
     Object.keys(data).forEach(x => {
         data[x] = data[x].replace(/["']/g, "");
     });
-    stmt.run(`"${data["Venue Name"]}"`, `"${data["Venue type"]}"`, `"${data["Address"].replace(/,/g, ' ')}"`, `${data["Latitude"]}`, `${data["Longitude"]}`);
+    stmt.run(`${data["Venue Name"]}`, `${data["Venue type"]}`, `${data["Address"].replace(/,/g, ' ')}`, `${data["Latitude"]}`, `${data["Longitude"]}`);
     stmt.finalize();
 }
 
@@ -230,9 +230,9 @@ function addEventInfoData(data, db) {
     Object.keys(data).forEach(x => {
         data[x] = data[x].replace(/["']/g, "");
     });
-    stmt.run(`"${data["title"]}"`, `"${data["description"]}"`, `"${data["cost"]}"`, `"${data["timeStart"]}"`, `"${data["timeStop"]}"`,
-        `"${data["venue"]}"`, `"${data["venueAddress"]}"`, `"${data["eventImage"]}"`, `"${data["bookings"]}"`, `"${data["category"]}"`,
-        `"${data["weblink"]}"`, `"${data["age"]}"`, `"${data["meetingPoint"]}"`, `"${data["requirements"]}"`, `${data["showType"]}"`, `"${data["schedule"]}"`);
+    stmt.run(`${data["title"]}`, `${data["description"]}`, `${data["cost"]}`, `${data["timeStart"]}`, `${data["timeStop"]}`,
+        `${data["venue"]}`, `${data["venueAddress"]}`, `${data["eventImage"]}`, `${data["bookings"]}`, `${data["category"]}`,
+        `${data["weblink"]}`, `${data["age"]}`, `${data["meetingPoint"]}`, `${data["requirements"]}`, `${data["showType"]}`, `${data["schedule"]}`);
     stmt.finalize();
 
 }
