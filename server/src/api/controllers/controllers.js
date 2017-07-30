@@ -4,7 +4,6 @@ module.exports = {
 
     setupRestApiGet : function(app) {
 
-        // get sent a lat, long, send all items near it
         app.get('/nearbyItems', function(req, res) {
             let lat = +req.query.lat;
             let lng = +req.query.lng;
@@ -18,6 +17,12 @@ module.exports = {
 
             findAndReturnSingleParkAllItems(parkID, res);
         });
+
+        app.get('/events', function(req, res) {
+            let daysForward = +req.query.daysForward;
+
+            findAndReturnAllEventsForDays(daysForward, res);
+        })
 
         app.get('/randomItemToReview', function(req, res) {
             findAndReturnSingleRandomItem(res);
@@ -68,7 +73,16 @@ function findAndReturnSingleParkAllItems(parkID, res) {
 
     var db = new sqlite.Database('UUUYou.db');
     db.all(`SELECT * FROM Items WHERE park = ${parkID}`, function(err, rows) {
-        res.send(JSON.stringify(rows))
+        res.send(JSON.stringify(rows));
     });
+    db.close();
+}
+
+function findAndReturnAllEventsForDays(daysForward, res) {
+
+    var db = new sqlite.Database('UUUYou.db');
+    db.all(`SELECT * FROM EventInfo WHERE timeStart BETWEEN (SELECT date('now')) AND (SELECT date('now','+${daysForward} day'));`, function(err, rows) {
+        res.send(JSON.stringify(rows));
+    })
     db.close();
 }
