@@ -1,44 +1,45 @@
 const start = async () => {
-    let list;
-
     try {
-        const data = await fetch("http://greensland.space/parkItems?lat=-27.38142559&lng=153.040722");
+        const data = await fetch("http://greensland.space/parkItems?id='D0863'");
         const json = await data.json();
-        list = json.slice(0, 100).map((item) => ({
+        const list = json.map((item) => ({
             lat: item.latitude,
             lng: item.longitude
         }))
 
+        const lats = list.map(x => x.lat);
+        const lngs = list.map(x => x.lng);
+
+        const maxLat = Math.max(...lats);
+        const minLat = Math.min(...lats);
+        const maxLng = Math.max(...lngs);
+        const minLng = Math.min(...lngs);
+
+        console.log("maxLat", maxLat);
+        console.log("minLat", minLat);
+        console.log("maxLng", maxLng);
+        console.log("minLng", minLng);
+
+        const mappedList = list.map((item) => {
+            const latNormal = (-100 * ((item.lat - maxLat) / (maxLat - minLat))) - 50;
+            const lngNormal = (-100 * ((item.lng - maxLng) / (maxLng - minLng))) - 50;
+            const latFinal = (latNormal);
+            const lngFinal = (lngNormal);
+            return `${latFinal} -50 ${lngFinal}`;
+        });
+
+        console.log(mappedList);
+
+        const scene = document.getElementById("scene");
+        for (let item of mappedList) {
+            const box = document.createElement("a-box");
+            box.setAttribute("position", item);
+            box.setAttribute("rotation", "0 45 0");
+            box.setAttribute("color", "red");
+            scene.appendChild(box);
+        }
     } catch (err) {
         console.log(err);
-    }
-
-    const sortedLat = list.sort((a, b) => {
-        return a.lat - b.lat
-    });
-
-    const sortedLng = list.sort((a, b) => {
-        return a.lng - b.lng
-    });
-
-    const normalList = sortedLat.map((item) => {
-        return {
-            lat: (((item.lat - sortedLat[0].lat) / (sortedLat[sortedLat.length - 1].lat - sortedLat[0].lat)) - 0.5) * 10,
-            lng: (((item.lng - sortedLng[0].lng) / (sortedLat[sortedLng.length - 1].lng - sortedLng[0].lng)) - 0.5) * 10
-        };
-    })
-
-    const mappedList = normalList.map((item) => (
-        `${item.lat} 0 ${item.lng}`
-    ));
-
-    const scene = document.getElementById("scene");
-    for (let item of mappedList) {
-        const box = document.createElement("a-box");
-        box.setAttribute("position", item);
-        box.setAttribute("rotation", "0 45 0");
-        box.setAttribute("color", "red");
-        scene.appendChild(box);
     }
 }
 

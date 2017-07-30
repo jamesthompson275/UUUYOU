@@ -5,3 +5,4 @@ app/npm-debug.log*
 app/dist/**
 server/dist/**
 server/UUUYou.db
+server/UUUYou.db-journal
