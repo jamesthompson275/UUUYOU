@@ -10,10 +10,13 @@ function initMap() {
 const checkChanged = e => {
     const label = e.target.value;
     
-    const found = _mapMarkers.find(x => x.label == label);
-    if (!found) return;
+    const found = _mapMarkers.filter(x => x.label == label);
+    console.log(found);
+    if (!found.length) return;
+    found.forEach(x => {
+        x.setVisible(!x.visible);
+    })
     
-    found.setVisible(!found.visible);
     _markerCluster.repaint();
 }
 
@@ -23,7 +26,18 @@ const doMarkers = newMarkers => {
             _markerCluster.removeMarker(_mapMarkers[i]);
         }
     }
-    _mapMarkers = newMarkers.map(x => new google.maps.Marker(x));
+    _mapMarkers = newMarkers.map(x => {
+        const m = new google.maps.Marker(x);
+        m.addListener('click', function(e) {
+            if (_Map.getZoom() >= 17) {
+                // SHOW VR
+                console.log("SHOW VR");
+                e.preventDefault();
+                
+            }
+        });
+        return m;
+    });
     _markerCluster = new MarkerClusterer(_Map,
         _mapMarkers,
         { 
@@ -75,6 +89,7 @@ window.GoogleMap = {
             }
             return carry;
         }, []))
+        .then(x => x.filter(i => i.label != ""))
         .then(x => {
             serverData  = x.slice();
             return x;
@@ -96,11 +111,12 @@ window.GoogleMap = {
             header.innerText = "Filter By: ";
             checkboxContainer.appendChild(header);
             x.reduce((carry, item) => {
-                if (!carry.find(i => i == item)) {
+                if (!carry.find(i => i.label == item.label)) {
                     carry.push(item);
                 }
                 return carry;
             }, [])
+            .sort((a, b) => a.label.localeCompare(b.label))
             .forEach(x => {
                 const check = document.createElement("input");
                 check.type = "checkbox";
@@ -111,7 +127,7 @@ window.GoogleMap = {
                 
                 const label = document.createElement("label");
                 label.innerText = x.label;
-                label.htmlFor = x.ItemID;
+                label.htmlFor = x.label;
                 
                 const container = document.createElement("div");
                 container.appendChild(check);
