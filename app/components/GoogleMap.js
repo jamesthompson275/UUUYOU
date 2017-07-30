@@ -30,9 +30,12 @@ window.GoogleMap = {
     },
 	AddMarkers: () => {
         // Ping API endpoint
+        const { north, east, west, south } = _Map.getBounds().toJSON();
+        
         window.API.GetMarkerLocations({
             lat: _Map.center.lat(),
-            lng: _Map.center.lng()
+            lng: _Map.center.lng(),
+            Math.min(threshold: Math.max(Math.abs(north - south), Math.abs(west - east)), 0.1)
         })
         .then(newMarkers => {
             if (_markerCluster) {
