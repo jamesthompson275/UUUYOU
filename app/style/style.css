@@ -112,3 +112,24 @@ video {
 .bottom-right {
     right: 20px;
 }
+
+.mainContainer {
+    position: fixed;
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    color: #f2f2f2;
+    height: 100%;
+    width: 100%;
+    font-size: 2em;
+}
+.mainContainer h1 {
+    margin-bottom: 0px;
+    
+}
+.mainContainer h2 {
+    color: #e2e2e2;
+    font-size: 1em;
+}

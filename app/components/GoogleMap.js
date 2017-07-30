@@ -137,6 +137,20 @@ window.GoogleMap = {
             
             return x;
         })
+        .then(x => {
+            const events = document.getElementById("events")
+            x.filter(y => y.title).forEach(e => {
+                 const event = document.createElement("div");
+                 const img = document.createElement("img");
+                 const title = document.createElement("p");
+                 img.src = e.eventImage;
+                 title.innerText = e.title;
+                 event.appendChild(title);
+                 event.appendChild(img);
+                 events.appendChild(event);
+            });
+            return x;
+        })
         .then(doMarkers)
         .catch(err => {
             throw new Error(err)

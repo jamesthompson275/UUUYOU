@@ -68,10 +68,24 @@ const init = () => {
         2000,
         () => {
             GoogleMap.GoTo(currentMessage.marker);
+            fetch("//greensland.space/api/randomItemToReview", {
+                method: "POST",
+                data: {
+                    id: currentMessage.original.ItemID,
+                    positive: 1
+                }
+            })
             currentMessage = "";
             timeout = 10000;
             setTimeout(n, timeout);
         }, () => {
+            fetch("//greensland.space/api/randomItemToReview", {
+                method: "POST",
+                data: {
+                    id: currentMessage.original.ItemID,
+                    positive: 0
+                }
+            })
             currentMessage = "";
             timeout = 50;
             setTimeout(n, timeout);

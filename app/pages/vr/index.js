@@ -1,7 +1,7 @@
 const start = async () => {
     try {
         const parkId = getParameterByName("park") ? getParameterByName("park") : "D0065";
-        const data = await fetch(`http://greensland.space/parkItems?id='${parkId}'`);
+        const data = await fetch(`http://greensland.space/api/parkItems?id='${parkId}'`);
         const json = await data.json();
         const list = json.map((item) => ({
             lat: item.latitude,

@@ -21,6 +21,24 @@
     position: relative;
 }
 
+#events {
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    right: 10px;
+    top: 70px;
+    padding: 10px;
+    background-color: rgba(0,0,0,0.5);
+    border-radius: 2px;
+    box-shadow: 0 3px 6px rgba(0,0,0,0.25), 0 3px 6px rgba(0,0,0,0.22);
+}
+
+#events h3{
+    color: whitesmoke;
+    margin: 5px 0;
+}
+
 #vr {
     display: none;
     position: fixed;
@@ -28,5 +46,4 @@
     left: 0px;
     width: 100%;
     height: 100%;
-    
 }

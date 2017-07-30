@@ -1,9 +1,5 @@
 const start = () => {
-    const openSnackbar = document.getElementById("openSnackbar");
-    openSnackbar.addEventListener("click", () => {
-        const snackbar = new window.snackbar("bottom-right");
-        snackbar.show();
-    });
+    
 }
 
 const init = () => {
