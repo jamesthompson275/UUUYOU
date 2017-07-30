@@ -10,8 +10,7 @@ function initMap() {
 const checkChanged = e => {
     const label = e.target.value;
     
-    const found = _mapMarkers.filter(x => x.label == label);
-    console.log(found);
+    const found = _mapMarkers.filter(x => x.type == label);
     if (!found.length) return;
     found.forEach(x => {
         x.setVisible(!x.visible);
@@ -94,12 +93,13 @@ window.GoogleMap = {
             return x;
         })
         .then(response => response.map(x => {
-            const label = _Map.getZoom() >= 17 ? x.label : x.park;
+            const label = _Map.getZoom() >= 17 ? x.label : x.parkName;
             return {
                  position: {
                      lat: +x.latitude,
                      lng: +x.longitude
                 },
+                type: x.type,
                 label: label,
                 park: x.park
             }
@@ -108,26 +108,25 @@ window.GoogleMap = {
             const checkboxContainer = document.getElementById("mapCheckboxes");
             checkboxContainer.innerHTML = "";
             const header = document.createElement("h1");
-            header.innerText = "Filter By: ";
+            header.innerText = "Hide: ";
             checkboxContainer.appendChild(header);
             x.reduce((carry, item) => {
-                if (!carry.find(i => i.label == item.label)) {
+                if (!carry.find(i => i.type == item.type)) {
                     carry.push(item);
                 }
                 return carry;
             }, [])
-            .sort((a, b) => a.label.localeCompare(b.label))
+            .sort((a, b) => a.type.localeCompare(b.type))
             .forEach(x => {
                 const check = document.createElement("input");
                 check.type = "checkbox";
-                check.value = x.label;
-                check.id = x.label;
+                check.value = x.type;
+                check.id = x.type;
                 check.addEventListener("change", checkChanged);
                 
-                
                 const label = document.createElement("label");
-                label.innerText = x.label;
-                label.htmlFor = x.label;
+                label.innerText = x.type;
+                label.htmlFor = x.type;
                 
                 const container = document.createElement("div");
                 container.appendChild(check);
@@ -138,8 +137,6 @@ window.GoogleMap = {
             
             return x;
         })
-        // .then(response => response.filter(x => true))
-        // Filter out unchecked items
         .then(doMarkers)
         .catch(err => {
             throw new Error(err)

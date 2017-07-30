@@ -15,7 +15,11 @@ const mapPage = () => {
 				lng: 153.0251235
 			}
         }
-    })
+    });
+    setTimeout(function() {
+        GoogleMap.AddMarkers();        
+    }, 250);
+    
 }
 
 function Show_VR(itemID) {
@@ -44,7 +48,6 @@ const init = () => {
     let timeout = 2500;
     const n = function() {
         const openSnackbar = document.getElementById("snack");
-        console.log(openSnackbar.style.display);
         if (openSnackbar.style.display == "none") {
             return setTimeout(n, timeout);
         } else if (currentMessage === undefined) {
@@ -69,14 +72,12 @@ const init = () => {
             timeout = 10000;
             setTimeout(n, timeout);
         }, () => {
-            console.log("no");
             currentMessage = "";
             timeout = 50;
             setTimeout(n, timeout);
         });
         
         snackbar.show();
-        
     }
     setTimeout(n, timeout);
 };
