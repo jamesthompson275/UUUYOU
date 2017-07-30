@@ -6,6 +6,8 @@ import {setupRestApiGet} from "./api/controllers/controllers";
 
 dbInit.initialiseDb();
 dbUpdate.readParkData();
+dbUpdate.readBCCRSS();
+
 
 const PORT = 3000;
 
