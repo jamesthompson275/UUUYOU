@@ -110,7 +110,8 @@ window.GoogleMap = {
             const header = document.createElement("h1");
             header.innerText = "Hide: ";
             checkboxContainer.appendChild(header);
-            x.reduce((carry, item) => {
+            x.filter(item => item.title)
+            .reduce((carry, item) => {
                 if (!carry.find(i => i.type == item.type)) {
                     carry.push(item);
                 }
