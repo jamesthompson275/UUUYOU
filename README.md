@@ -26,4 +26,4 @@ Node server for fetching the data sets
 ### Stack
 * Node
 * Express
-* JSON files for DB (lol)
+* Sqlite3
